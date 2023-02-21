@@ -1262,9 +1262,10 @@ async function run() {
 
   files.forEach((file) => {
     const fileStat = fs.lstatSync(file);
+    const relativePath = path.relative(process.env.GITHUB_WORKSPACE, file);
 
     if (!fileStat.isDirectory()) {
-      zip.addLocalFile(file);
+      zip.addLocalFile(file, path.dirname(relativePath));
       console.log(`[+] ${file} to zip`);
     }
   });
