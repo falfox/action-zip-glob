@@ -1244,7 +1244,6 @@ const glob = __webpack_require__(281);
 const AdmZip = __webpack_require__(639);
 const core = __webpack_require__(470);
 
-const files = core.getInput("files");
 const dest = core.getInput("dest");
 
 console.log(`Ready to zip "${files}" into ${dest}`);
@@ -1252,7 +1251,7 @@ console.log(`Ready to zip "${files}" into ${dest}`);
 const zip = new AdmZip();
 
 async function run() {
-  const patterns = files.split(" ");
+  const patterns = core.getInput("files").split(" ");
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 

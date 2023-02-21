@@ -3,7 +3,6 @@ const glob = require('@actions/glob');
 const AdmZip = require("adm-zip");
 const core = require("@actions/core");
 
-const files = core.getInput("files");
 const dest = core.getInput("dest");
 
 console.log(`Ready to zip "${files}" into ${dest}`);
@@ -11,7 +10,7 @@ console.log(`Ready to zip "${files}" into ${dest}`);
 const zip = new AdmZip();
 
 async function run() {
-  const patterns = files.split(" ");
+  const patterns = core.getInput("files").split(" ");
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 
