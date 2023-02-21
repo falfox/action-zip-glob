@@ -1261,10 +1261,10 @@ async function run() {
   }
 
   files.forEach((file) => {
-    const fileStat = fs.lstatSync(filePath);
+    const fileStat = fs.lstatSync(file);
 
     if (!fileStat.isDirectory()) {
-      zip.addLocalFile(filePath);
+      zip.addLocalFile(file);
       console.log(`[+] ${file} to zip`);
     }
   });
