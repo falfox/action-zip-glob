@@ -20,8 +20,6 @@ async function run() {
   }
 
   files.forEach((file) => {
-    const filePath = path.join(process.env.GITHUB_WORKSPACE, file);
-
     const fileStat = fs.lstatSync(filePath);
 
     if (!fileStat.isDirectory()) {
@@ -30,7 +28,7 @@ async function run() {
     }
   });
 
-  const destPath = path.join(process.env.GITHUB_WORKSPACE, file);
+  const destPath = path.join(process.env.GITHUB_WORKSPACE, dest);
 
   zip.writeZip(destPath);
 
