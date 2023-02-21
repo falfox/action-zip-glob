@@ -1,11 +1,9 @@
 const path = require("path");
-const glob = require('@actions/glob');
+const glob = require("@actions/glob");
 const AdmZip = require("adm-zip");
 const core = require("@actions/core");
 
 const dest = core.getInput("dest");
-
-console.log(`Ready to zip "${files}" into ${dest}`);
 
 const zip = new AdmZip();
 

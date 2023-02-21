@@ -1246,8 +1246,6 @@ const core = __webpack_require__(470);
 
 const dest = core.getInput("dest");
 
-console.log(`Ready to zip "${files}" into ${dest}`);
-
 const zip = new AdmZip();
 
 async function run() {
