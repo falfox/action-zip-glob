@@ -30,24 +30,11 @@ files.split(" ").forEach((fileName) => {
     });
   } else {
     const filePath = path.join(process.env.GITHUB_WORKSPACE, fileName);
+    const dir = path.dirname(filePath);
+    const zipDir = dir === process.env.GITHUB_WORKSPACE ? "" : dir;
 
-    if (!fs.existsSync(filePath)) {
-      console.log(`  - ${fileName} (Not Found)`);
-      return;
-    }
-
-    const dir = path.dirname(fileName);
-    const stats = fs.lstatSync(filePath);
-
-    if (stats.isDirectory()) {
-      const zipDir = dir === "." ? fileName : dir;
-      zip.addLocalFolder(filePath, !recursive && zipDir);
-    } else {
-      const zipDir = dir === "." ? "" : dir;
-      zip.addLocalFile(filePath, !recursive && zipDir);
-    }
-
-    console.log(`  - ${fileName}`);
+    zip.addLocalFile(filePath, !recursive && zipDir);
+    console.log(`  - ${filePath}`);
   }
 });
 

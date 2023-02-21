@@ -11,7 +11,7 @@ inputs:
   recursive:
     description: "Whether to add subdirectories to simply zip all files to the root"
     required: false
-    default: true
+    default: false
 branding:
   icon: "package"
   color: "red"
