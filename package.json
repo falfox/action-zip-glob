@@ -21,9 +21,8 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^2.1.1",
+    "@actions/glob": "^0.4.0",
     "adm-zip": "^0.4.14",
-    "glob": "^8.1.0",
-    "is-glob": "^4.0.3",
     "zip-local": "^0.3.4"
   },
   "devDependencies": {
