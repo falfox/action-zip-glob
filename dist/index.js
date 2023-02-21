@@ -1239,6 +1239,7 @@ exports.issueCommand = issueCommand;
 /***/ 104:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
+const fs = __webpack_require__(747);
 const path = __webpack_require__(622);
 const glob = __webpack_require__(281);
 const AdmZip = __webpack_require__(639);
@@ -1249,7 +1250,8 @@ const dest = core.getInput("dest");
 const zip = new AdmZip();
 
 async function run() {
-  const patterns = core.getInput("files").split(" ");
+  const input = core.getInput("files");
+  const patterns = input.split(" ");
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 
@@ -1261,10 +1263,15 @@ async function run() {
   files.forEach((file) => {
     const filePath = path.join(process.env.GITHUB_WORKSPACE, file);
 
-    zip.addLocalFile(filePath);
+    const fileStat = fs.lstatSync(filePath);
+
+    if (!fileStat.isDirectory()) {
+      zip.addLocalFile(filePath);
+      console.log(`[+] ${file} to zip`);
+    }
   });
 
-  const destPath = path.join(process.env.GITHUB_WORKSPACE, dest);
+  const destPath = path.join(process.env.GITHUB_WORKSPACE, file);
 
   zip.writeZip(destPath);
 
